@@ -1,0 +1,180 @@
+assets = []
+
+
+# Function to add an asset
+def add_asset():
+    print("\n--- ADD ASSET ---")
+
+    asset = {}
+
+    asset["id"] = input("Asset ID: ")
+    asset["name"] = input("Asset Name: ")
+
+    print("Asset Types: Workstation, Server, Router, Switch, Application")
+    asset["type"] = input("Asset Type: ")
+
+    asset["ip"] = input("IP Address: ")
+    asset["os"] = input("Operating System: ")
+    asset["department"] = input("Owner/Department: ")
+
+    print("Risk Levels: Low, Medium, High, Critical")
+    asset["risk"] = input("Risk Level: ")
+
+    print("Security Status: Secure, Warning, Vulnerable")
+    asset["status"] = input("Security Status: ")
+
+    assets.append(asset)
+
+    print("\nAsset added successfully!")
+
+
+# Function to display all assets
+def display_assets():
+    if len(assets) == 0:
+        print("\nNo assets available.")
+        return
+
+    print("\n========================================")
+    print("       CYBERSECURITY ASSET INVENTORY")
+    print("========================================")
+
+    for asset in assets:
+        print("Asset ID      :", asset["id"])
+        print("Asset Name    :", asset["name"])
+        print("Asset Type    :", asset["type"])
+        print("IP Address    :", asset["ip"])
+        print("OS            :", asset["os"])
+        print("Department    :", asset["department"])
+        print("Risk Level    :", asset["risk"])
+        print("Status        :", asset["status"])
+        print("----------------------------------------")
+
+
+# Function to search an asset
+def search_asset():
+    asset_id = input("\nEnter Asset ID to search: ")
+
+    for asset in assets:
+        if asset["id"] == asset_id:
+            print("\nAsset Found!")
+            print("Asset ID      :", asset["id"])
+            print("Asset Name    :", asset["name"])
+            print("Asset Type    :", asset["type"])
+            print("IP Address    :", asset["ip"])
+            print("OS            :", asset["os"])
+            print("Department    :", asset["department"])
+            print("Risk Level    :", asset["risk"])
+            print("Status        :", asset["status"])
+            return
+
+    print("\nAsset not found.")
+
+
+# Function to update an asset
+def update_asset():
+    asset_id = input("\nEnter Asset ID to update: ")
+
+    for asset in assets:
+        if asset["id"] == asset_id:
+
+            print("\nEnter new details:")
+
+            asset["name"] = input("Asset Name: ")
+            asset["type"] = input("Asset Type: ")
+            asset["ip"] = input("IP Address: ")
+            asset["os"] = input("Operating System: ")
+            asset["department"] = input("Owner/Department: ")
+            asset["risk"] = input("Risk Level: ")
+            asset["status"] = input("Security Status: ")
+
+            print("\nAsset updated successfully!")
+            return
+
+    print("\nAsset not found.")
+
+
+# Function to delete an asset
+def delete_asset():
+    asset_id = input("\nEnter Asset ID to delete: ")
+
+    for asset in assets:
+        if asset["id"] == asset_id:
+            assets.remove(asset)
+            print("\nAsset deleted successfully!")
+            return
+
+    print("\nAsset not found.")
+
+
+# Function to display statistics
+def statistics():
+    total = len(assets)
+
+    critical = 0
+    high = 0
+    medium = 0
+    vulnerable = 0
+
+    for asset in assets:
+        if asset["risk"].lower() == "critical":
+            critical += 1
+        elif asset["risk"].lower() == "high":
+            high += 1
+        elif asset["risk"].lower() == "medium":
+            medium += 1
+
+        if asset["status"].lower() == "vulnerable":
+            vulnerable += 1
+
+    print("\n========================================")
+    print("             ASSET STATISTICS")
+    print("========================================")
+    print("Total Assets      :", total)
+    print("Critical Assets   :", critical)
+    print("High Risk Assets  :", high)
+    print("Medium Risk Assets:", medium)
+    print("Vulnerable Assets :", vulnerable)
+    print("========================================")
+
+
+# Main menu
+while True:
+
+    print("\n========================================")
+    print("   CYBERSECURITY ASSET INVENTORY SYSTEM")
+    print("========================================")
+    print("1. Add Asset")
+    print("2. Search Asset")
+    print("3. Update Asset")
+    print("4. Delete Asset")
+    print("5. Display Assets")
+    print("6. Display Statistics")
+    print("7. Exit")
+    print("========================================")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_asset()
+
+    elif choice == "2":
+        search_asset()
+
+    elif choice == "3":
+        update_asset()
+
+    elif choice == "4":
+        delete_asset()
+
+    elif choice == "5":
+        display_assets()
+
+    elif choice == "6":
+        statistics()
+
+    elif choice == "7":
+        print("\nThank you!")
+        break
+
+    else:
+        print("\nInvalid choice. Please try again.")
